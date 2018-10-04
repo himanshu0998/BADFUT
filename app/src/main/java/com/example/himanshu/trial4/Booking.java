@@ -59,7 +59,7 @@ public class Booking extends AppCompatActivity {
         bookings= new Bookings();
         Calendar c = Calendar.getInstance();
         Date date = new Date();
-
+        calendarView.setMinDate(c.getTimeInMillis());
 
        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
