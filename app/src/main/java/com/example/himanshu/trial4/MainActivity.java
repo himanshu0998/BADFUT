@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 200;
     private static final String PATH_TOS = "";
 
-    boolean check;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         mpwd = (EditText)findViewById(R.id.mpwd);
         mlogin = (Button)findViewById(R.id.login);
         msignup = (TextView)findViewById(R.id.msignup);
-        check = false;
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -110,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
                         {
                             Toast.makeText(MainActivity.this,"Could Not Send Email!!",Toast.LENGTH_SHORT).show();
                         }
-                        check = true;
                     }
                 });
     }
