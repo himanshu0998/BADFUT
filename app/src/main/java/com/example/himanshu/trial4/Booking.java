@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 
 
 import com.firebase.ui.auth.util.ui.SupportVectorDrawablesButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -59,6 +63,7 @@ public class Booking extends AppCompatActivity {
         bookings= new Bookings();
         Calendar c = Calendar.getInstance();
         Date date = new Date();
+
         calendarView.setMinDate(c.getTimeInMillis());
 
        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -101,6 +106,28 @@ public class Booking extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_logout)
+        {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(Booking.this,Main.class);
+            startActivity(intent);
+
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void openDialog()

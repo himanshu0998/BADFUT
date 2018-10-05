@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -111,6 +115,27 @@ public class PostSignUp extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_logout)
+        {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(PostSignUp.this,Main.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void onBadClicked()
     {
         b=true;
@@ -128,7 +153,6 @@ public class PostSignUp extends AppCompatActivity {
 
                     if(courts.getType().toString().compareTo("B")==0) {
                         cvector1.addElement(court1);
-                        //System.out.print(courts.getAddress().toString());
                         list1.add(courts.getName().toString() + "\n" + courts.getAddress().toString());
                     }
                 }
@@ -172,5 +196,10 @@ public class PostSignUp extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
     }
 }

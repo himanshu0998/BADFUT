@@ -26,10 +26,10 @@ public class Main extends AppCompatActivity {
     EditText memail,mpwd;
     TextView msignup;
     Button mlogin;
-    //private DatabaseReference databaseUsers;
-    //private DatabaseReference databaseCourts;
+
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     private static final int RC_SIGN_IN = 200;
     private static final String PATH_TOS = "";
@@ -43,10 +43,20 @@ public class Main extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         memail = (EditText)findViewById(R.id.memail);
         mpwd = (EditText)findViewById(R.id.mpwd);
-        //databaseUsers = FirebaseDatabase.getInstance().getReference("users");
-        //databaseCourts = FirebaseDatabase.getInstance().getReference("Courts");
         mlogin = (Button)findViewById(R.id.login);
         msignup = (TextView)findViewById(R.id.msignup);
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser()!=null)
+                {
+                    Intent intent = new Intent(Main.this,PostSignUp.class);
+                    startActivity(intent);
+                }
+            }
+        };
+
         msignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +70,12 @@ public class Main extends AppCompatActivity {
                 userLogin();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
@@ -97,26 +113,6 @@ public class Main extends AppCompatActivity {
     }
 
 
-    /*public void UserInDatabase()
-    {
-        String id=databaseUsers.push().getKey();
-
-        //Users user = new Users(id,email.getText().toString(),mobno.getText().toString(),pwd.getText().toString());
-        //databaseUsers.child(id).setValue(user);
-        Toast.makeText(Main.this,"User added to database!",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(Main.this, PostSignUp.class);
-        startActivity(intent);
-    }
-
-    public void CourtInDatabase()
-    {
-        //String id=databaseUsers.push().getKey();
-        Courts court = new Courts("Soccer Den","Kothrud,Pune");
-        //databaseUsers.child(id).setValue(user);
-        Toast.makeText(Main.this,"User added to database!",Toast.LENGTH_SHORT).show();
-       Intent intent = new Intent(Main.this, PostSignUp.class);
-        startActivity(intent);
-    }*/
 
     public void userLogin()
     {
