@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#A0A0A0"
     tools:context=".MainActivity">
 
     <EditText
         android:background="@drawable/roundedtext"
         android:id="@+id/memail"
         android:layout_width="340dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="133dp"
@@ -22,7 +23,7 @@
         android:background="@drawable/roundedtext"
         android:id="@+id/mpwd"
         android:layout_width="340dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="212dp"
