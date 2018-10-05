@@ -10,7 +10,7 @@
     <ListView
         android:id="@+id/courtList"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="374dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
@@ -23,24 +23,24 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="71dp"-->
 
-    <RadioButton
-        android:id="@+id/foot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/imageButtonF"
+        android:layout_width="51dp"
+        android:layout_height="53dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="64dp"
-        android:layout_marginTop="97dp"
-        android:text="Football" />
+        android:layout_marginEnd="74dp"
+        android:layout_marginTop="48dp"
+        app:srcCompat="@drawable/badfootimg3" />
 
-    <RadioButton
-        android:id="@+id/bad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/imageButtonB"
+        android:layout_width="54dp"
+        android:layout_height="53dp"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/foot"
-        android:layout_marginStart="46dp"
-        android:text="Badminton" />
+        android:layout_alignTop="@+id/imageButtonF"
+        android:layout_marginStart="74dp"
+        app:srcCompat="@drawable/badfootimg1" />
 
 
 </RelativeLayout>
