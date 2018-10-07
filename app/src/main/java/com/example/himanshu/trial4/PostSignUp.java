@@ -1,5 +1,6 @@
-package com.example.himanshu.trial4;
+package com.example.user.footbad;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -40,6 +42,8 @@ public class PostSignUp extends AppCompatActivity {
     RadioButton bad,foot;
     public static Courts selectedCourt;
     RadioGroup ss;
+    ImageButton imageButtonB,imageButtonF;
+
     Vector<Courts> cvector1,cvector2;
     Boolean b,f;
     @Override
@@ -47,28 +51,25 @@ public class PostSignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_sign_up);
         courtList = (ListView)findViewById(R.id.courtList);
-        bad = (RadioButton)findViewById(R.id.bad);
-        foot = (RadioButton)findViewById(R.id.foot);
         firebaseCourts = FirebaseDatabase.getInstance();
         databaseReference = firebaseCourts.getReference("BADFUT/COURTS");
-
+        imageButtonB=(ImageButton)findViewById(R.id.imageButtonB);
+        imageButtonF=(ImageButton) findViewById(R.id.imageButtonF);
         courts = new Courts();
 
-        bad.setOnClickListener(new View.OnClickListener() {
+        imageButtonB.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View view) {
                 onBadClicked();
-
             }
         });
-
-        foot.setOnClickListener(new View.OnClickListener() {
+        imageButtonF.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 onFootClicked();
             }
         });
+
 
         courtList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -128,7 +129,7 @@ public class PostSignUp extends AppCompatActivity {
         if(id == R.id.action_logout)
         {
             FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(PostSignUp.this,Main.class);
+            Intent intent = new Intent(PostSignUp.this,MainActivity.class);
             startActivity(intent);
             finish();
             return true;
