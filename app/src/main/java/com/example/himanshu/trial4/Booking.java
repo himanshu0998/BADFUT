@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.firebase.ui.auth.util.ui.SupportVectorDrawablesButton;
@@ -46,14 +47,14 @@ public class Booking extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     Vector<Bookings> bvector;
     Vector<String> timvector;
-
+    boolean flag;
     public static Bookings book;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
-
+        Toast.makeText(Booking.this,"Tap on the Date to view the slots",Toast.LENGTH_SHORT).show();
         timings = PostSignUp.selectedCourt.getTimings().split(",");
 
         timingList = (ListView)findViewById(R.id.timingList);
@@ -63,7 +64,7 @@ public class Booking extends AppCompatActivity {
         bookings= new Bookings();
         Calendar c = Calendar.getInstance();
         Date date = new Date();
-
+        flag=false;
         calendarView.setMinDate(c.getTimeInMillis());
 
        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -101,8 +102,7 @@ public class Booking extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 book=new Bookings(PostSignUp.selectedCourt.getName(),currentDate,arrayList.get(position));
                openDialog();
-                /*Intent intent=new Intent(getApplicationContext(),PaymentMainActivity.class);
-                startActivity(intent);*/
+
             }
         });
 
@@ -164,9 +164,13 @@ public class Booking extends AppCompatActivity {
         arrayList = new ArrayList<String>();
         for(String timstr:timings)
         {
-            if(!timvector.contains(timstr))
+            if(!timvector.contains(timstr)) {
                 arrayList.add(timstr);
+                flag = true;
+            }
         }
+        if(!flag)
+            arrayList.add("Oops!!! No slots available!!");
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
         timingList.setAdapter(adapter);
 

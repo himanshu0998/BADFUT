@@ -35,6 +35,7 @@ public class Main extends AppCompatActivity {
     private static final String PATH_TOS = "";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +50,7 @@ public class Main extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser()!=null)
+                if(firebaseAuth.getCurrentUser()!=null &&  mAuth.getCurrentUser().isEmailVerified())
                 {
                     Intent intent = new Intent(Main.this,PostSignUp.class);
                     startActivity(intent);
@@ -87,9 +88,6 @@ public class Main extends AppCompatActivity {
             {
                 firebaseUser = mAuth.getCurrentUser();
                 sendVerificationEmail();
-                //Toast.makeText(Main.this,"Registered Successfully!",Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(Main.this, PostSignUp.class);
-                //startActivity(intent);
             }
         }
     }
@@ -100,14 +98,14 @@ public class Main extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                      if(task.isSuccessful())
-                      {
-                          Toast.makeText(Main.this,"Email Sent For Verification!! Please Verify",Toast.LENGTH_SHORT).show();
-                      }
-                      else
-                      {
-                          Toast.makeText(Main.this,"Could Not Send Email!!",Toast.LENGTH_SHORT).show();
-                      }
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(Main.this,"Email Sent For Verification!! Please Verify",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(Main.this,"Could Not Send Email!!",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
@@ -122,6 +120,7 @@ public class Main extends AppCompatActivity {
         if(email.length()<=0)
         {
             Toast.makeText(this,"Please Enter Email ID!",Toast.LENGTH_SHORT).show();
+
         }
         else if(pwd.length()<=0)
         {
@@ -133,7 +132,11 @@ public class Main extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             firebaseUser = mAuth.getCurrentUser();
-                            if (firebaseUser.isEmailVerified()) {
+                            if(firebaseUser==null) {
+                                Toast.makeText(Main.this, "Email is Not Registered!! Please Register First", Toast.LENGTH_SHORT).show();
+                                startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setTosUrl(PATH_TOS).build(),RC_SIGN_IN);
+                            }
+                            else if (firebaseUser.isEmailVerified()) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(Main.this, "Logged In Successfully!", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(Main.this, PostSignUp.class);
@@ -146,7 +149,7 @@ public class Main extends AppCompatActivity {
                         }
                     });
         }
-        }
+    }
 
     @Override
     public void onBackPressed() {

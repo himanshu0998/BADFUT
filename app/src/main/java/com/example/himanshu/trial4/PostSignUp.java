@@ -1,4 +1,4 @@
-package com.example.user.footbad;
+package com.example.himanshu.trial4;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -129,7 +129,7 @@ public class PostSignUp extends AppCompatActivity {
         if(id == R.id.action_logout)
         {
             FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(PostSignUp.this,MainActivity.class);
+            Intent intent = new Intent(PostSignUp.this,Main.class);
             startActivity(intent);
             finish();
             return true;
