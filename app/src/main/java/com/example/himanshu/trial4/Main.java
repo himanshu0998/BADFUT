@@ -53,6 +53,7 @@ public class Main extends AppCompatActivity {
                 if(firebaseAuth.getCurrentUser()!=null &&  mAuth.getCurrentUser().isEmailVerified())
                 {
                     Intent intent = new Intent(Main.this,PostSignUp.class);
+                    //finish();
                     startActivity(intent);
                 }
             }
@@ -137,6 +138,7 @@ public class Main extends AppCompatActivity {
                                    if (task.isSuccessful()) {
                                        Toast.makeText(Main.this, "Logged In Successfully!", Toast.LENGTH_SHORT).show();
                                        Intent intent = new Intent(Main.this, PostSignUp.class);
+                                       //finish();
                                        startActivity(intent);
                                    } else
                                        Toast.makeText(Main.this, "Invalid Credentials!", Toast.LENGTH_SHORT).show();
@@ -165,6 +167,7 @@ public class Main extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         setResult(RESULT_OK, new Intent().putExtra("EXIT", true));
                         finish();
+                        android.os.Process.killProcess(android.os.Process.myPid());
                     }
                 }).create().show();
     }

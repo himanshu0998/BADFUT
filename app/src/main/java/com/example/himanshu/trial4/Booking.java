@@ -122,9 +122,8 @@ public class Booking extends AppCompatActivity {
         {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(Booking.this,Main.class);
-            startActivity(intent);
-
             finish();
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -142,6 +141,7 @@ public class Booking extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         Intent intent = new Intent(Booking.this, PayAct.class);
+                        //finish();
                         startActivity(intent);
                     }
                 }).create().show();

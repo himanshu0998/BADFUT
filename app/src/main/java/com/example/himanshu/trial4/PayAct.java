@@ -36,6 +36,7 @@ public class PayAct extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 addInDatabase();
                                 Intent intent = new Intent(PayAct.this, PostSignUp.class);
+                                finish();
                                 startActivity(intent);
                             }
                         }).create().show();

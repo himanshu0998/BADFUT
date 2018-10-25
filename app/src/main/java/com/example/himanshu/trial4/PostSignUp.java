@@ -97,6 +97,7 @@ public class PostSignUp extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(PostSignUp.this,Booking.class);
+                        //finish();
                         startActivity(intent);
                     }
                 });
@@ -130,8 +131,8 @@ public class PostSignUp extends AppCompatActivity {
         {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(PostSignUp.this,Main.class);
-            startActivity(intent);
             finish();
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
