@@ -132,20 +132,23 @@ public class Main extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             firebaseUser = mAuth.getCurrentUser();
-                            if(firebaseUser==null) {
-                                Toast.makeText(Main.this, "Email is Not Registered!! Please Register First", Toast.LENGTH_SHORT).show();
-                                startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setTosUrl(PATH_TOS).build(),RC_SIGN_IN);
-                            }
-                            else if (firebaseUser.isEmailVerified()) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(Main.this, "Logged In Successfully!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(Main.this, PostSignUp.class);
-                                    startActivity(intent);
-                                } else
-                                    Toast.makeText(Main.this, "Invalid Credentials!", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(Main.this, "Email is Not Verified!!", Toast.LENGTH_SHORT).show();
-                            }
+                           try {
+                               if (firebaseUser.isEmailVerified()) {
+                                   if (task.isSuccessful()) {
+                                       Toast.makeText(Main.this, "Logged In Successfully!", Toast.LENGTH_SHORT).show();
+                                       Intent intent = new Intent(Main.this, PostSignUp.class);
+                                       startActivity(intent);
+                                   } else
+                                       Toast.makeText(Main.this, "Invalid Credentials!", Toast.LENGTH_SHORT).show();
+                               } else {
+                                   Toast.makeText(Main.this, "Email is Not Verified!!", Toast.LENGTH_SHORT).show();
+                               }
+                           }
+                           catch(Exception e)
+                           {
+                               Toast.makeText(Main.this, "Login Error!!", Toast.LENGTH_SHORT).show();
+
+                           }
                         }
                     });
         }
