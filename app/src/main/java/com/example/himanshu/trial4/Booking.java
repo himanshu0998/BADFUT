@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.firebase.ui.auth.util.ui.SupportVectorDrawablesButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -74,10 +73,8 @@ public class Booking extends AppCompatActivity {
                 timvector=new Vector<>();
                 for(Bookings bk:bvector)
                 {
-                    //System.out.println(currentDate);
                     if(bk.getDate().equals(currentDate))
                         timvector.addElement(bk.getSlots());
-
                 }
                 changeList();
             }
@@ -161,6 +158,7 @@ public class Booking extends AppCompatActivity {
 
     private void changeList()
     {
+        flag=false;
         arrayList = new ArrayList<String>();
         for(String timstr:timings)
         {

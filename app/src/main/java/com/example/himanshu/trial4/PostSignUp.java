@@ -13,11 +13,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Vector;
 
 public class PostSignUp extends AppCompatActivity {
@@ -39,9 +35,9 @@ public class PostSignUp extends AppCompatActivity {
     ArrayList<String> list,list1,list2;
     ArrayAdapter<String> adapter;
     Courts courts,court1;
-    RadioButton bad,foot;
+    //RadioButton bad,foot;
     public static Courts selectedCourt;
-    RadioGroup ss;
+    //RadioGroup ss;
     ImageButton imageButtonB,imageButtonF;
 
     Vector<Courts> cvector1,cvector2;
@@ -76,8 +72,6 @@ public class PostSignUp extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 System.out.println(position);
 
-
-                //Intent intent = new Intent(PostSignUp.this,CourtInfo.class);
                 if(b)
                 {
                     selectedCourt = cvector1.get(position);
@@ -108,7 +102,6 @@ public class PostSignUp extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-                /*startActivity(intent);*/
                 mBuilder.setView(mView);
                 AlertDialog dialog = mBuilder.create();
                 dialog.show();

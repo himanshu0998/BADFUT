@@ -17,8 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 
 
 public class Main extends AppCompatActivity {
@@ -167,7 +166,8 @@ public class Main extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         setResult(RESULT_OK, new Intent().putExtra("EXIT", true));
                         finish();
-                        android.os.Process.killProcess(android.os.Process.myPid());
+                        //android.os.Process.killProcess(android.os.Process.myPid());
+                        System.exit(0);
                     }
                 }).create().show();
     }
